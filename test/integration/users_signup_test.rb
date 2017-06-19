@@ -10,6 +10,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                               password_confirmation: "bar"  }
     assert_equal before_count, User.count
     assert_template 'users/new'
+    assert_select 'div#error_explanation'
+    assert_select 'div.alert-danger'
   end
 
   test "valid signup information" do
@@ -21,5 +23,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                           password_confirmation: "password" }
     assert_equal expected_count, User.count
     assert_template 'users/show'
+    assert_select 'div.alert-success'
+    assert_not_nil flash
+    assert_not flash[:danger]
+    assert_not_nil flash[:success]
   end
 end
