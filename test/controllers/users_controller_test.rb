@@ -16,6 +16,14 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should create user and redirect to root" do
+    post :create, user: { name: "New User",
+                  email: "new@example.com",
+                  password: "password",
+                  password_confirmation: "password" }
+    assert_redirected_to root_url
+  end
+
   test "should redirect edit when not logged in" do
     get :edit, id: @user
     assert_not flash.empty?
