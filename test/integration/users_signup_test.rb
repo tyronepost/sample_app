@@ -8,23 +8,25 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
   test "invalid signup information" do
     get signup_path
-    before_count = User.count
-    post users_path, user: {  name: "",
-                              email: "user@invalid",
-                              password: "foo",
-                              password_confirmation: "bar"  }
-    assert_equal before_count, User.count
+    assert_no_difference 'User.count' do
+
+      post users_path, user: {  name: "",
+                                email: "user@invalid",
+                                password: "foo",
+                                password_confirmation: "bar"  }
+    end
     assert_template 'users/new'
   end
 
   test "valid signup information with account activation" do
     get signup_path
-    expected_count = User.count + 1
-    post_via_redirect users_path, user: { name: "Example User",
-                                          email: "user@example.com",
-                                          password: "password",
-                                          password_confirmation: "password" }
-    assert_equal expected_count, User.count
+    assert_difference 'User.count', 1 do
+
+      post users_path, user: { name: "Example User",
+                               email: "user@example.com",
+                               password: "password",
+                               password_confirmation: "password" }
+    end
     assert_equal 1, ActionMailer::Base.deliveries.size
     user = assigns(:user)
     assert_not user.activated?
