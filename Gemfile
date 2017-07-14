@@ -13,6 +13,8 @@ gem 'sdoc',                     '0.4.0', group: :doc
 gem 'faker',                    '1.4.2'
 gem 'will_paginate',            '3.0.7'
 gem 'bootstrap-will_paginate', '~> 1.0'
+gem 'carrierwave',              '1.0.0'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
@@ -31,4 +33,5 @@ group :production do
   gem 'pg',             '0.17.1'
   gem 'rails_12factor', '0.0.2'
   gem 'puma',           '2.11.1'
+  # gem 'fog'
 end
