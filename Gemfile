@@ -26,6 +26,7 @@ end
 group :test do
   gem 'simplecov'
   gem 'codeclimate-test-reporter', '~> 0.4.8'
+  gem 'codecov', :require => false, :group => :test
 end
 
 group :production do
