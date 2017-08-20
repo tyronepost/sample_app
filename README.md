@@ -10,3 +10,4 @@ by [Micheal Hartl](http://www.michaelhartl.com/)
 [![codecov](https://codecov.io/gh/tyronepost/sample_app/branch/master/graph/badge.svg)](https://codecov.io/gh/tyronepost/sample_app)
 
 [![Code Climate](https://codeclimate.com/github/tyronepost/sample_app/badges/gpa.svg)](https://codeclimate.com/github/tyronepost/sample_app)
+

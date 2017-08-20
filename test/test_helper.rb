@@ -1,11 +1,14 @@
-require 'simplecov'
-SimpleCov.start 'rails'
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
-
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'simplecov'
+require 'codecov'
+
+SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
+ SimpleCov::Formatter::HTMLFormatter,
+ SimpleCov::Formatter::Codecov
+])
+SimpleCov.start 'rails'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
