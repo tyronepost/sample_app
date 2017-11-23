@@ -4,10 +4,12 @@ require 'rails/test_help'
 require 'simplecov'
 require 'codecov'
 
-SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
- SimpleCov::Formatter::HTMLFormatter,
- SimpleCov::Formatter::Codecov
-])
+if ENV['CI'] == true
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+else
+  SimpleCov.formatter =SimpleCov::Formatter::HTMLFormatter
+end
+
 SimpleCov.start 'rails'
 
 class ActiveSupport::TestCase
@@ -23,7 +25,7 @@ class ActiveSupport::TestCase
     password = options[:password] || 'password'
     remember_me = options[:remember_me] || '1'
     if integration_test?
-      post login_path, session_hash(user, password, remember_me)
+      post login_path, params: session_hash(user, password, remember_me)
     else
       session[:user_id] = user.id
     end
@@ -36,8 +38,8 @@ class ActiveSupport::TestCase
   end
 
   def session_hash(user, password, remember_me)
-    { session: { email: user.email,
-                 password: password,
-                 remember_me: remember_me } }
+    {session: {email: user.email,
+               password: password,
+               remember_me: remember_me}}
   end
 end
